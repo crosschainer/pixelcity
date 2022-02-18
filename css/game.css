@@ -1,0 +1,165 @@
+html, body
+{
+    position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #007ced;
+	background: linear-gradient(to bottom, #007ced 1%,#cce7ff 100%);
+  font-family: 'Press Start 2P', cursive;
+  z-index: -1;
+  
+	
+}
+.container-cloud{
+    
+    background: url(https://static.radulescu.me/examples/clouds/clouds1000.png);
+  background: url(https://static.radulescu.me/examples/clouds/clouds1000.png) 0 200px,
+              url(https://static.radulescu.me/examples/clouds/clouds1200_1.png) 0 300px,
+              url(../img/mob_cloud.png) 100px 250px;
+	animation: wind 20s linear infinite;
+}
+@keyframes wind{
+    0% {
+      background-position: 0 200px, 0 300px, 100px 250px;
+    }
+    100% {
+      background-position: 1000px 200px, 1200px 300px, 1100px 250px;
+    }
+  
+  }
+#city{
+    width:2048px;
+    height:2048px;
+    background:white;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-left: 3em;
+    padding-top: 7em;
+    background-image: url("../img/bg_new.png");
+    color: #444;
+    border: 10px solid;
+    border-color: #8b8b8b;
+    border-style: dashed;
+    border-radius: 5em;
+    box-shadow: rgba(0, 0, 0, 0.96) 0px 22px 70px 4px;
+}
+#city_2{
+    width:2048px;
+    height:2048px;
+    background:white;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-left: 3em;
+    padding-top: 7em;
+    background-image: url("../img/bg_new.png");
+    color: #444;
+    border: 10px solid;
+    border-color: #8b8b8b;
+    border-style: dashed;
+    border-radius: 5em;
+    box-shadow: rgba(0, 0, 0, 0.96) 0px 22px 70px 4px;
+}
+footer{
+    position: fixed;
+    width: 100%;
+    height: 64px;
+    bottom: 0px;
+    border-top: 2px solid white;
+
+    vertical-align: middle;
+    background-image: linear-gradient( 
+        180deg
+         ,#31b3e5,#31b3e5);
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.footer_text{
+    width: fit-content;
+}
+.footer_text span{
+    border: 2px solid;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    color: white;
+}
+.plot{
+   
+    width: 192px;
+    height: 192px;
+    z-index:2;
+    text-align: center;
+    font-size: 5em;
+    
+    background: url("https://www.pixelwhale.io/gif/506a54be19efc73f914676ac6b84dc15eab0fe8b7fa3608fce25aaa414e4474c.gif");
+    cursor: pointer;
+    background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+}
+.street_vertical{
+    border: 1px solid;
+    width: 64px;
+    height: 128px;
+    z-index:2;
+}
+.tree{
+  position: absolute;
+  height: 128px;
+  width: 128px;
+    top: 128px;
+    left: 1024px;
+    background-image: url("../img/tree.png");
+    background-size: cover;
+}
+
+.rock{
+  position: absolute;
+  height: 128px;
+  width: 128px;
+  top: 240px;
+  left: 1391px;
+  background-image: url(../img/rock.png);
+  background-size: cover;
+  z-index: 1;
+}
+#city > div:nth-child(29){
+  margin-left:28px;
+  margin-top: 26px;
+}
+#city > div:nth-child(30){
+  margin-left:-28px;
+  margin-top: 26px;
+}
+#city > div:nth-child(37)
+{
+  margin-top: -26px;
+  margin-left: 28px;
+}
+#city > div:nth-child(38){
+  margin-top: -26px;
+  margin-left: -28px;
+}
+#city > div:nth-child(39){
+  margin-left: 28px;
+}
+#city > div:nth-child(40){
+  margin-left: -28px;
+}
+#city > div:nth-child(36){
+  margin-left: -28px;
+}
+#city > div:nth-child(35){
+  margin-left: 28px;
+}

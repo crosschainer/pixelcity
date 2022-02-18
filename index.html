@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="crosschainer" />
+
+    <title>PixelCity · Lamden</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/game.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://www.pixelwhale.io/gif/1b654b960496275a20999dad4dee24daf33be40924a453a3c2b1999940275e74.gif"
+    />
+  </head>
+
+  <body>
+    <div
+      style="
+        position: fixed;
+        width: 34em;
+        padding: 1em;
+        border: 5px solid;
+        font-size: 0.8em;
+        z-index: 1000;
+      "
+    >
+      <h5>
+        Info Box
+        <span
+          id="close"
+          style="cursor: pointer"
+          onclick="this.parentNode.parentNode.remove(); return false;"
+          >x</span
+        >
+      </h5>
+      Welcome to PixelCity!
+      <hr />
+      Why would I want to own a plot and a building in PixelCity?
+      <hr />
+      For each plot/building you own, you get a share of royalties the city
+      generates! The more residents move in, the higher land/building prices go
+      and the more you earn.
+      <hr />
+      How do I get started?
+      <hr />
+      1. Purchase a plot of land and any building you like on PixelWhale.
+      <a
+        target="_blank"
+        href="https://www.pixelwhale.io/creator/d47a1c512171f8776294737cb5eb485118ba5fda288c11750232da38befee7e3"
+        >Click to Buy Plots/Buildings</a
+      >
+      <br /><br />2. Return to PixelCity and click your plot # (corresponds to
+      the # you purchased on PixelWhale) <br /><br />
+      3. Use the Build function to put your building on the plot.<br /><br />4.
+      As a new owner, you’ll enjoy royalties as new residents move in and
+      transfers are made. Occasionally check on your PixelCity plot(s) by
+      clicking on them and then claim your rewards.
+      <hr />
+      <a
+        target="_blank"
+        href="https://www.pixelwhale.io/creator/d47a1c512171f8776294737cb5eb485118ba5fda288c11750232da38befee7e3"
+        >Click to Buy Plots/Buildings
+        <span style="color: red">(Only these are real!)</span></a
+      >
+    </div>
+    <div class="container-cloud">
+      <div id="world" class="zoomable" style="width: fit-content">
+        <div
+          id="bridge"
+          style="
+            height: 210px;
+            position: absolute;
+            width: 1500px;
+            border-top: #a3a3a3 dashed 10px;
+            border-bottom: #a3a3a3 dashed 10px;
+            background: #b45309;
+            /* background: linear-gradient(90deg, rgba(155,95,61,1) 0%, rgba(82,52,34,1) 32%, rgba(82,52,34,1) 74%, rgba(155,95,61,1) 100%); */
+            left: 2453px;
+            top: 1248px;
+          "
+        ></div>
+        <div
+          id="island"
+          style="
+            width: fit-content;
+            padding: 24em;
+            background: url('img/grass.png');
+            border-radius: 80em;
+            border: 2em #9b7653 solid;
+          "
+        >
+          <div class="tree"></div>
+          <div class="tree" style="left: 824px; top: 181px"></div>
+          <div
+            class="tree"
+            style="left: 895px; top: 75px; height: 176px; width: 128px"
+          ></div>
+          <div
+            class="tree"
+            style="left: 1426px; top: 105px; height: 157px"
+          ></div>
+          <div
+            class="tree"
+            style="left: 1591px; height: 127px; width: 104px; top: 204px"
+          ></div>
+          <div class="tree" style="left: 1666px; top: 96px"></div>
+          <div class="tree" style="left: 1822px; top: 171px"></div>
+          <div class="tree" style="left: 1345px; top: -3px"></div>
+          <div class="tree" style="left: 648px; top: 160px"></div>
+          <div class="tree" style="left: 2031px; top: 135px"></div>
+          <div class="tree" style="left: 1972px; top: 228px"></div>
+          <div class="tree" style="left: 531px; top: 211px"></div>
+          <div class="tree" style="left: 1124px; top: 208px"></div>
+          <div class="tree" style="left: 1233px; top: 77px"></div>
+          <div class="tree" style="top: 162px; left: 1238px"></div>
+          <div class="tree" style="top: 45px; left: 1109px"></div>
+          <div class="rock" style=""></div>
+          <div class="rock" style="top: 257px; left: 924px"></div>
+          <div class="rock" style="top: 66px; left: 1817px"></div>
+          <div
+            class="tree"
+            style="
+              left: 228px;
+              top: 700px;
+              background-image: url(https://www.seekpng.com/png/full/221-2214967_doge-face-png-dog-face-transparent-background.png);
+            "
+          ></div>
+          <div id="city">
+            <h2
+              style="
+                position: absolute;
+                font-size: 20em;
+                color: white;
+                top: -2em;
+                right: 50%;
+                width: 100%;
+                transform: translate(50%, -50%);
+                text-align: center;
+              "
+            >
+              District 01
+            </h2>
+          </div>
+        </div>
+        <div id="island" style="width:fit-content;padding:24em;background:url(img/grass.png);border-radius:80em;border:2em #9b7653 solid;position: absolute;left: 3525px;top: 0px;z-index: -1;">
+
+
+
+
+
+
+
+
+<div id="city_2">
+<h2 style="
+            position: absolute;
+            font-size: 20em;
+            color: white;
+            top: -2em;
+            right: 50%;width: 100%;
+            transform: translate(50%,-50%);text-align: center;
+        ">District 02</h2>
+</div>
+</div>
+      </div>
+    </div>
+    <footer>
+      <div class="d-flex justify-content-between" style="height: inherit">
+        <span
+          style="
+            border: 2px solid;
+            padding: 0.5em;
+            border-radius: 0.5em;
+            height: fit-content;
+            color: #fff;
+            margin-top: auto;
+            margin-bottom: auto;
+            font-size: 0.7rem;
+          "
+          >Drag & Zoom to Look Around</span
+        >
+
+        <span
+          style="
+            color: #fff;
+            margin-top: auto;
+            margin-bottom: auto;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+          "
+          >Lamden PixelCity Beta<br />@crosschainer</span
+        >
+
+        <a
+          href="#"
+          id="connect_wallet"
+          style="
+            border: 2px solid;
+            padding: 0.5em;
+            border-radius: 0.5em;
+            height: fit-content;
+            color: #fff;
+            margin-top: auto;
+            margin-bottom: auto;
+            background-color: #461bc2;
+            border-color: white;
+            font-size: 0.7rem;
+          "
+          >Connect Wallet</a
+        >
+      </div>
+    </footer>
+  </body>
+
+  <div
+    class="modal fade"
+    id="plotModal"
+    tabindex="-1"
+    aria-labelledby="plotModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="plotModalLabel">
+            Plot ID: <span style="display: none" id="plot_id"></span
+            ><span id="plot_id_real"></span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="owned" style="display: none">
+            <span>Owner: </span
+            ><b
+              style="word-wrap: break-word; font-size: 0.5rem"
+              id="build_owner"
+            ></b
+            ><br /><br />
+            <span>Rewards Available: </span
+            ><b style="word-wrap: break-word" id="rewards_owner"></b> TAU
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="collect_rewards"
+            style="display: none"
+            class="btn btn-primary"
+          >
+            Collect Rewards
+          </button>
+          <button
+            type="button"
+            id="build"
+            style="display: none"
+            class="btn btn-primary"
+          >
+            Build
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="buildModal"
+    tabindex="-1"
+    aria-labelledby="buildModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="buildModalLabel">
+            Plot ID: <span style="display: none" id="plot_id_build"></span
+            ><span id="plot_id_build_real"></span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h5>Select a Building to build on your plot!</h5>
+          <select
+            class="form-select form-select-md mb-3"
+            id="building_nfts"
+            aria-label=".form-select-lg example"
+          >
+            <option selected>Loading..</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="build_confirm" class="btn btn-primary">
+            Build
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js"></script>
+  <script src="js/game-dev.js"></script>
+</html>
