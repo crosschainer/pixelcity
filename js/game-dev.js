@@ -161,10 +161,10 @@ function prepareCityPlots() {
                                 if (plot["con_pixel_whale_info_v1"]["S"][plot_object[key]]["owner"] == plots[plot_object[key]]["current_plot_owner"]) {
                                     if (plots[plot_object[key]]["built"] != undefined && plots[plot_object[key]]["built"] != "") {
                                         try{
-                                        $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="'+ rewards["con_pixelcity_master_1"]["rewards"][plots[plot_object[key]]["current_plot_owner"]]["__fixed__"] +'" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
+                                        $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="'+ rewards["con_pixelcity_master_1"]["rewards"][plots[plot_object[key]]["current_plot_owner"]]["__fixed__"] +'" data-build="' + plots[plot_object[key]]["built"] + '" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
                                         }
                                         catch{
-                                            $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="0" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
+                                            $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="0" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" data-build="' + plots[plot_object[key]]["built"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
 
                                         }
                                     }
@@ -270,6 +270,31 @@ $("#build_confirm").click(function () {
     $("#build_confirm").text("Waiting for TX..");
 });
 
+$("#set_name").click(function () {
+    $('#plotModal').modal('hide');
+    $('#nameModal').modal('show');
+});
+
+$("#build_name_confirm").click(function () {
+    var build = $("#building_id").text();
+    var name_text = $("#build_name").val();
+
+    const detail = JSON.stringify({
+        contractName: 'con_pixelcity_meta',
+        methodName: 'set_metadata',
+        networkType: 'mainnet',
+        kwargs: {
+            key: "name",
+            value: name_text,
+            build_thing: build
+        },
+
+        stampLimit: 200,
+    });
+    document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
+    $("#build_name_confirm").text("Waiting for TX..");
+});
+
 document.addEventListener('lamdenWalletTxStatus', (response) => {
       
     if (response.detail.data.resultInfo.title=="Transaction Successful" && response.detail.data.txInfo.methodName == "connect_built_to_plot"){ 
@@ -277,6 +302,10 @@ document.addEventListener('lamdenWalletTxStatus', (response) => {
         document.dispatchEvent(new CustomEvent('lamdenWalletInfo'));
     }
     if (response.detail.data.resultInfo.title=="Transaction Successful" && response.detail.data.txInfo.methodName == "claim_rewards"){ 
+        location.reload();
+        document.dispatchEvent(new CustomEvent('lamdenWalletInfo'));
+    }
+    if (response.detail.data.resultInfo.title=="Transaction Successful" && response.detail.data.txInfo.methodName == "set_metadata"){ 
         location.reload();
         document.dispatchEvent(new CustomEvent('lamdenWalletInfo'));
     }
@@ -318,15 +347,25 @@ $(document).on("click", ".plot", function () {
     var plot_owner = $(this).data('plot-owner');
     var build_owner = $(this).data('owner');
     var rewards_owner = $(this).data('rewards');
+    var build = $(this).data('build');
     $("#plot_id").text(plotId);
     $("#plot_id_build").text(plotId);
     $("#plot_id_real").text(plotId+1);
     $("#plot_id_build_real").text(plotId+1);
     $('#plotModal').modal('show');
     $('#build').hide()
-    $('#owned').show();
-    console.log(plot_owner);
-    console.log(build_owner);
+        $('#owned').show();
+        $("#building_id").text(build);
+    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_meta/metadata_builds", function (build_meta) {
+        try {
+            $("#build_custom_name").text(build_meta["con_pixelcity_meta"]['metadata_builds'][build]['user_defined']['name']);
+        }
+        catch {
+                        $("#build_custom_name").text("Not set");
+
+        }
+    });
+    
     if (build_owner == undefined) {
         $('#owned').hide();
         $('#build').show();
@@ -336,6 +375,7 @@ $(document).on("click", ".plot", function () {
     }
     if (address == build_owner) {
         $('#collect_rewards').show();
+        $('#set_name').show()
     }
     else {
         $('#collect_rewards').hide();

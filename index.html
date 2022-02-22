@@ -254,6 +254,20 @@
               id="build_owner"
             ></b
             ><br /><br />
+            <span style="display:none" id="building_id"></span>
+            <span>Building Name:</span><br>
+            <b
+              style="word-wrap: break-word;"
+              id="build_custom_name"
+            >Not set</b>&nbsp;<button
+            type="button"
+            id="set_name"
+            style="display:none"
+            class="btn btn-primary btn-sm"
+          >
+            Set Name
+          </button>
+            <br /><br />
             <span>Rewards Available: </span
             ><b style="word-wrap: break-word" id="rewards_owner"></b> TAU
           </div>
@@ -314,6 +328,42 @@
         <div class="modal-footer">
           <button type="button" id="build_confirm" class="btn btn-primary">
             Build
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="nameModal"
+    tabindex="-1"
+    aria-labelledby="nameModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="nameModalLabel">
+            Change Name
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h5>Choose a Name for your building</h5>
+          <div class="input-group input-group-sm mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+          <input type="text" class="form-control" aria-label="Name" id="build_name" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="build_name_confirm" class="btn btn-primary">
+            Submit
           </button>
         </div>
       </div>
