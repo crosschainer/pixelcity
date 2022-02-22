@@ -264,7 +264,7 @@ $("#build_confirm").click(function () {
             build_thing: $("#building_nfts").children("option:selected").val()
         },
 
-        stampLimit: 400,
+        stampLimit: 500,
     });
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#build_confirm").text("Waiting for TX..");
@@ -295,7 +295,7 @@ $("#collect_rewards").click(function () {
         kwargs: {
         },
 
-        stampLimit: 400,
+        stampLimit: 500,
     });
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#collect_rewards").text("Waiting for TX..");
