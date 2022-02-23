@@ -126,7 +126,12 @@ $(document).ready(function () {
         // now all zoom operations will happen based on the center of the screen
         initialX: 1000,
         initialY: 300,
-        initialZoom: 0.3
+        initialZoom: 0.3,
+        onTouch: function(e) {
+            // `e` - is current touch event.
+
+            return false; // tells the library to not preventDefault.
+        }
     });
     prepareCityPlots();
 });
@@ -339,7 +344,8 @@ document.addEventListener('lamdenWalletInfo', (response) => {
 });
 
 
-$(document).on("click", ".plot", function () {
+$(document).on("click", ".plot", function (e) {
+
     if(address != ""){
        
     
