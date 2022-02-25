@@ -9,6 +9,7 @@ def seed():
     pixelcity_contract.set("con_pixelcity_master_1")
     mob_contract.set("con_mintorburn")
 
+@export
 def depositRewards(mob_amount: float):
     assert mob_amount > 0, "Cant deposit negative amounts"
     I.import_module(mob_contract.get()).transfer_from(amount=mob_amount, to=ctx.this, main_account=ctx.caller)

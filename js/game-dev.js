@@ -371,7 +371,7 @@ $(document).on("click", ".plot", function (e) {
 
         }
     });
-    
+        
     if (build_owner == undefined) {
         $('#owned').hide();
         $('#build').show();
