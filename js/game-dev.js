@@ -337,7 +337,7 @@ $("#collect_rewards").click(function () {
 
 $("#collect_mob_rewards").click(function () {
     const detail = JSON.stringify({
-        contractName: 'con_pixelcity_staking_master_3',
+        contractName: 'con_pixelcity_staking_master_4',
         methodName: 'claim_rewards',
         networkType: 'mainnet',
         kwargs: {
@@ -385,13 +385,13 @@ $(document).on("click", ".plot", function (e) {
 
         }
     });
-    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_staking_master_3/staking_rewards", function (build_meta) {
+    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_staking_master_4/staking_rewards", function (build_meta) {
      
-        if(isNaN(Number(build_meta["con_pixelcity_staking_master_3"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8))){
+        if(isNaN(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8))){
             $("#mob_rewards_owner").text(Number(0).toFixed(8));
         }
         else{
-            $("#mob_rewards_owner").text(Number(build_meta["con_pixelcity_staking_master_3"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8));
+            $("#mob_rewards_owner").text(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8));
         }
     });
         

@@ -23,7 +23,7 @@ def depositRewards(mob_amount: float):
         if plots[plot_thing]:
             if plots[plot_thing] != 0:
                 if(plots[plot_thing]["built"] != ""):
-                    staking_rewards[plots[plot_thing]["current_build_owner"]] += mob_balances[ctx.this] / (len(in_use_building_nfts))            
+                    staking_rewards[plots[plot_thing]["current_build_owner"]] += mob_amount / (len(in_use_building_nfts))            
 
 @export
 def claim_rewards():
