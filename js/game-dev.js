@@ -335,6 +335,20 @@ $("#collect_rewards").click(function () {
     $("#collect_rewards").text("Waiting for TX..");
 });
 
+$("#collect_mob_rewards").click(function () {
+    const detail = JSON.stringify({
+        contractName: 'con_pixelcity_staking_master_3',
+        methodName: 'claim_rewards',
+        networkType: 'mainnet',
+        kwargs: {
+        },
+
+        stampLimit: 500,
+    });
+    document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
+    $("#collect_mob_rewards").text("Waiting for TX..");
+});
+
 document.addEventListener('lamdenWalletInfo', (response) => {
     if (response.detail.errors === undefined) {
         address = response.detail.wallets[0];
@@ -371,6 +385,15 @@ $(document).on("click", ".plot", function (e) {
 
         }
     });
+    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_staking_master_3/staking_rewards", function (build_meta) {
+     
+        if(isNaN(Number(build_meta["con_pixelcity_staking_master_3"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8))){
+            $("#mob_rewards_owner").text(Number(0).toFixed(8));
+        }
+        else{
+            $("#mob_rewards_owner").text(Number(build_meta["con_pixelcity_staking_master_3"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8));
+        }
+    });
         
     if (build_owner == undefined) {
         $('#owned').hide();
@@ -381,10 +404,12 @@ $(document).on("click", ".plot", function (e) {
     }
     if (address == build_owner) {
         $('#collect_rewards').show();
+        $('#collect_mob_rewards').show();
         $('#set_name').show()
     }
     else {
         $('#collect_rewards').hide();
+        $('#collect_mob_rewards').hide();
     }
     if(isNaN(Number(rewards_owner).toFixed(8))){
         
