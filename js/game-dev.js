@@ -109,6 +109,14 @@ var plot_object = null;
 var building_keys = null;
 var building_object = null;
 
+var plots_2 = null;
+var rewards_2 = null;
+var plot_keys_2 = null;
+var plot_object_2 = null;
+var building_keys_2 = null;
+var building_object_2 = null;
+
+
 const detail = JSON.stringify({
     appName: 'PixelCity',
     version: '0.0.1',
@@ -134,6 +142,9 @@ $(document).ready(function () {
         }
     });
     prepareCityPlots();
+    prepareCityPlots_2();
+    $("#game_screen").show();
+    $("#loading_screen").remove();
 });
 
 function prepareCityPlots() {
@@ -166,23 +177,23 @@ function prepareCityPlots() {
                                 if (plot["con_pixel_whale_info_v1"]["S"][plot_object[key]]["owner"] == plots[plot_object[key]]["current_plot_owner"]) {
                                     if (plots[plot_object[key]]["built"] != undefined && plots[plot_object[key]]["built"] != "") {
                                         try{
-                                        $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="'+ rewards["con_pixelcity_master_1"]["rewards"][plots[plot_object[key]]["current_plot_owner"]]["__fixed__"] +'" data-build="' + plots[plot_object[key]]["built"] + '" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
+                                        $("#city").append('<div class="plot" data-district="1" data-id="' + x + '" data-rewards="'+ rewards["con_pixelcity_master_1"]["rewards"][plots[plot_object[key]]["current_plot_owner"]]["__fixed__"] +'" data-build="' + plots[plot_object[key]]["built"] + '" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
                                         }
                                         catch{
-                                            $("#city").append('<div class="plot" data-id="' + x + '" data-rewards="0" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" data-build="' + plots[plot_object[key]]["built"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
+                                            $("#city").append('<div class="plot" data-district="1" data-id="' + x + '" data-rewards="0" data-plot-owner="' + plots[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots[plot_object[key]]["current_build_owner"] + '" data-build="' + plots[plot_object[key]]["built"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots[plot_object[key]]["built"] + '.gif)"></div>');
 
                                         }
                                     }
                                     else{
-                                        $("#city").append('<div class="plot" data-id="' + x + '"></div>');
+                                        $("#city").append('<div class="plot" data-district="1" data-id="' + x + '"></div>');
                                     }
                                 }
                                 else{
-                                    $("#city").append('<div class="plot" data-id="' + x + '"></div>');
+                                    $("#city").append('<div class="plot"  data-district="1" data-id="' + x + '"></div>');
                                 }
                             }
                             catch {
-                                $("#city").append('<div class="plot" data-id="' + x + '"></div>');
+                                $("#city").append('<div class="plot" data-district="1" data-id="' + x + '"></div>');
                             }
                             
                         });
@@ -191,7 +202,75 @@ function prepareCityPlots() {
 
                     default: 
                         if(x < 64){
-                            $("#city").append('<div class="plot" data-id="' + x + '"></div>');
+                            $("#city").append('<div class="plot" data-district="1" data-id="' + x + '"></div>');
+                            
+                        }
+                        x = x + 1;
+                        break;
+                    
+                }
+            });
+
+            }
+        });
+    });
+}
+function prepareCityPlots_2() {
+    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_master_2/plots/", function (plotdata) {
+        try {
+            plots_2 = plotdata["con_pixelcity_master_2"]["plots"];
+        }
+        catch {
+            plots_2 = {}
+        }
+        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_master_2/rewards/", function (rewardsdata) {
+            rewards_2 = rewardsdata;
+            $.getJSON("js/plots_2.json", function (plot_json) {
+                plot_keys_2 = Object.keys(plot_json);
+                plot_object_2 = plot_json;
+            });
+            $.getJSON("js/buildings_2.json", function (building_json) {
+                building_keys_2 = Object.keys(building_json);
+                building_object_2 = building_json;
+            });
+            for (x = 0; x < (64) ;) {
+                plot_keys_2.forEach((key, index) => {
+             
+                switch (x) {
+                    case parseInt(key):
+                       
+                        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/"+ plot_object[key] +"", function (plot) {
+                            try {
+                                
+                                if (plot["con_pixel_whale_info_v1"]["S"][plot_object[key]]["owner"] == plots_2[plot_object[key]]["current_plot_owner"]) {
+                                    if (plots_2[plot_object[key]]["built"] != undefined && plots_2[plot_object[key]]["built"] != "") {
+                                        try{
+                                        $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '" data-rewards="'+ rewards_2["con_pixelcity_master_2"]["rewards"][plots_2[plot_object[key]]["current_plot_owner"]]["__fixed__"] +'" data-build="' + plots_2[plot_object[key]]["built"] + '" data-plot-owner="' + plots_2[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots_2[plot_object[key]]["current_build_owner"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots_2[plot_object[key]]["built"] + '.gif)"></div>');
+                                        }
+                                        catch{
+                                            $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '" data-rewards="0" data-plot-owner="' + plots_2[plot_object[key]]["current_plot_owner"] + '" data-owner="' + plots_2[plot_object[key]]["current_build_owner"] + '" data-build="' + plots_2[plot_object[key]]["built"] + '" style="background-image:url(https://www.pixelwhale.io/gif/' + plots_2[plot_object[key]]["built"] + '.gif)"></div>');
+
+                                        }
+                                    }
+                                    else{
+                                        $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '"></div>');
+                                    }
+                                }
+                                else{
+                                    $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '"></div>');
+                                }
+                            }
+                            catch {
+                                $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '"></div>');
+                            }
+                            
+                        });
+                        x = x + 1;
+                        break;
+
+                    default: 
+                        if(x < 64){
+                            $("#city_2").append('<div class="plot" data-district="2" data-id="' + x + '"></div>');
                             
                         }
                         x = x + 1;
@@ -206,57 +285,111 @@ function prepareCityPlots() {
 }
 $("#build").click(function () {
     var plot_id = parseInt($("#plot_id").text());
+    var district_id = parseInt($("#district_id").text());
     var shown_msg = false;
     var x = 0
-    plot_keys.forEach((key, index) => {
-    switch (plot_id) {
-        case parseInt(key):
-            console.log(key);
-            if(plot_id in plot_keys){
-                x = plot_object[key];
-            }
-            else{
-                alert("This plot has not been minted yet");
-            }
-            break;
-        default:
-            if(plot_id in plot_keys){
-                
-            }
-            else{
-                if(shown_msg == false){
-                alert("This plot has not been minted yet");
-                shown_msg = true;
+    if(district_id == 1){
+        plot_keys.forEach((key, index) => {
+        switch (plot_id) {
+            case parseInt(key):
+                console.log(key);
+                if(plot_id in plot_keys){
+                    x = plot_object[key];
                 }
-            }
-            break;
-    }
-    });
-    console.log("PLOT UID: " + x);
-    console.log("PLOT INTERNAL: " + plot_id);
-    $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/" + x, function (plot_check) {
-        console.log("PLOT OWNER: "+ plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"]);
-        console.log("LOGGED IN ADDRESS: " + address);
-        if (plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"] != address) {
-            alert("You don't own this plot, so you cant build on it!");
-        }
-        else {
-            $('#buildModal').modal('show');
-            $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/", function (buildings) {
-                let owned_buildings = Object.values(buildings["con_pixel_whale_info_v1"]["S"]).filter((obj) => {
-                    return obj.owner == address
-                });
-                $("#building_nfts").empty();
-                var arrayLength = owned_buildings.length;
-                for (var i = 0; i < arrayLength; i++) {
-                    if (Object.values(building_object).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
-                        $("#building_nfts").append("<option data-plot='" + x + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
-                    }
+                else{
+                    alert("This plot has not been minted yet");
+                }
+                break;
+            default:
+                if(plot_id in plot_keys){
                     
                 }
-            });
+                else{
+                    if(shown_msg == false){
+                    alert("This plot has not been minted yet");
+                    shown_msg = true;
+                    }
+                }
+                break;
         }
-    });
+        });
+        console.log("PLOT UID: " + x);
+        console.log("PLOT INTERNAL: " + plot_id);
+        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/" + x, function (plot_check) {
+            console.log("PLOT OWNER: "+ plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"]);
+            console.log("LOGGED IN ADDRESS: " + address);
+            if (plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"] != address) {
+                alert("You don't own this plot, so you cant build on it!");
+            }
+            else {
+                $('#buildModal').modal('show');
+                $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/", function (buildings) {
+                    let owned_buildings = Object.values(buildings["con_pixel_whale_info_v1"]["S"]).filter((obj) => {
+                        return obj.owner == address
+                    });
+                    $("#building_nfts").empty();
+                    var arrayLength = owned_buildings.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        if (Object.values(building_object).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
+                            $("#building_nfts").append("<option data-plot='" + x + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
+                        }
+                        
+                    }
+                });
+            }
+        });
+    }
+    if(district_id == 2){
+        plot_keys_2.forEach((key, index) => {
+        switch (plot_id) {
+            case parseInt(key):
+                console.log(key);
+                if(plot_id in plot_keys_2){
+                    x = plot_object[key];
+                }
+                else{
+                    alert("This plot has not been minted yet");
+                }
+                break;
+            default:
+                if(plot_id in plot_keys_2){
+                    
+                }
+                else{
+                    if(shown_msg == false){
+                    alert("This plot has not been minted yet");
+                    shown_msg = true;
+                    }
+                }
+                break;
+        }
+        });
+        console.log("PLOT UID: " + x);
+        console.log("PLOT INTERNAL: " + plot_id);
+        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/" + x, function (plot_check) {
+            console.log("PLOT OWNER: "+ plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"]);
+            console.log("LOGGED IN ADDRESS: " + address);
+            if (plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"] != address) {
+                alert("You don't own this plot, so you cant build on it!");
+            }
+            else {
+                $('#buildModal').modal('show');
+                $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/", function (buildings) {
+                    let owned_buildings = Object.values(buildings["con_pixel_whale_info_v1"]["S"]).filter((obj) => {
+                        return obj.owner == address
+                    });
+                    $("#building_nfts").empty();
+                    var arrayLength = owned_buildings.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        if (Object.values(building_object).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
+                            $("#building_nfts").append("<option data-plot='" + x + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
+                        }
+                        
+                    }
+                });
+            }
+        });
+    }
 });
 
 $("#build_confirm").click(function () {
@@ -368,7 +501,9 @@ $(document).on("click", ".plot", function (e) {
     var build_owner = $(this).data('owner');
     var rewards_owner = $(this).data('rewards');
     var build = $(this).data('build');
+    var district = $(this).data('district');
     $("#plot_id").text(plotId);
+    $("#district_id").text(district);
     $("#plot_id_build").text(plotId);
     $("#plot_id_real").text(plotId+1);
     $("#plot_id_build_real").text(plotId+1);
