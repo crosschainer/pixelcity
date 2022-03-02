@@ -394,22 +394,15 @@ $("#build").click(function () {
 
 $("#build_confirm").click(function () {
     var district_id = parseInt($("#district_id").text());
+    var contract = "";
     if (district_id == 1) {
-        const detail = JSON.stringify({
-            contractName: 'con_pixelcity_master_1',
-            methodName: 'connect_built_to_plot',
-            networkType: 'mainnet',
-            kwargs: {
-                plot_thing: $("#building_nfts").children("option:selected").data('plot'),
-                build_thing: $("#building_nfts").children("option:selected").val()
-            },
-
-            stampLimit: 500,
-        });
+        contract = "con_pixelcity_master_1";
     }
     if (district_id == 2) { 
-        const detail = JSON.stringify({
-            contractName: 'con_pixelcity_master_2',
+       contract = "con_pixelcity_master_2";
+    }
+     const detail = JSON.stringify({
+            contractName: contract,
             methodName: 'connect_built_to_plot',
             networkType: 'mainnet',
             kwargs: {
@@ -419,7 +412,6 @@ $("#build_confirm").click(function () {
 
             stampLimit: 500,
         });
-    }
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#build_confirm").text("Waiting for TX..");
 });
@@ -472,9 +464,15 @@ $("#connect_wallet").click(function () {
 
 $("#collect_rewards").click(function () {
     var district_id = parseInt($("#district_id").text());
+    var contract = "";
     if (district_id == 1) {
-        const detail = JSON.stringify({
-            contractName: 'con_pixelcity_master_1',
+        contract = "con_pixelcity_master_1";
+    }
+    if (district_id == 2) { 
+       contract = "con_pixelcity_master_2";
+    }
+     const detail = JSON.stringify({
+            contractName: contract,
             methodName: 'claim_rewards',
             networkType: 'mainnet',
             kwargs: {
@@ -482,18 +480,6 @@ $("#collect_rewards").click(function () {
 
             stampLimit: 500,
         });
-    }
-    if (district_id == 2) {
-        const detail = JSON.stringify({
-            contractName: 'con_pixelcity_master_2',
-            methodName: 'claim_rewards',
-            networkType: 'mainnet',
-            kwargs: {
-            },
-
-            stampLimit: 500,
-        });
-    }
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#collect_rewards").text("Waiting for TX..");
 });
