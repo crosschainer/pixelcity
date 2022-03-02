@@ -381,7 +381,7 @@ $("#build").click(function () {
                     $("#building_nfts").empty();
                     var arrayLength = owned_buildings.length;
                     for (var i = 0; i < arrayLength; i++) {
-                        if (Object.values(building_object).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
+                        if (Object.values(building_object_2).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
                             $("#building_nfts").append("<option data-plot='" + x + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
                         }
                         
@@ -393,17 +393,33 @@ $("#build").click(function () {
 });
 
 $("#build_confirm").click(function () {
-    const detail = JSON.stringify({
-        contractName: 'con_pixelcity_master_1',
-        methodName: 'connect_built_to_plot',
-        networkType: 'mainnet',
-        kwargs: {
-            plot_thing: $("#building_nfts").children("option:selected").data('plot'),
-            build_thing: $("#building_nfts").children("option:selected").val()
-        },
+    var district_id = parseInt($("#district_id").text());
+    if (district_id == 1) {
+        const detail = JSON.stringify({
+            contractName: 'con_pixelcity_master_1',
+            methodName: 'connect_built_to_plot',
+            networkType: 'mainnet',
+            kwargs: {
+                plot_thing: $("#building_nfts").children("option:selected").data('plot'),
+                build_thing: $("#building_nfts").children("option:selected").val()
+            },
 
-        stampLimit: 500,
-    });
+            stampLimit: 500,
+        });
+    }
+    if (district_id == 2) { 
+        const detail = JSON.stringify({
+            contractName: 'con_pixelcity_master_2',
+            methodName: 'connect_built_to_plot',
+            networkType: 'mainnet',
+            kwargs: {
+                plot_thing: $("#building_nfts").children("option:selected").data('plot'),
+                build_thing: $("#building_nfts").children("option:selected").val()
+            },
+
+            stampLimit: 500,
+        });
+    }
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#build_confirm").text("Waiting for TX..");
 });
@@ -455,15 +471,29 @@ $("#connect_wallet").click(function () {
 });
 
 $("#collect_rewards").click(function () {
-    const detail = JSON.stringify({
-        contractName: 'con_pixelcity_master_1',
-        methodName: 'claim_rewards',
-        networkType: 'mainnet',
-        kwargs: {
-        },
+    var district_id = parseInt($("#district_id").text());
+    if (district_id == 1) {
+        const detail = JSON.stringify({
+            contractName: 'con_pixelcity_master_1',
+            methodName: 'claim_rewards',
+            networkType: 'mainnet',
+            kwargs: {
+            },
 
-        stampLimit: 500,
-    });
+            stampLimit: 500,
+        });
+    }
+    if (district_id == 2) {
+        const detail = JSON.stringify({
+            contractName: 'con_pixelcity_master_2',
+            methodName: 'claim_rewards',
+            networkType: 'mainnet',
+            kwargs: {
+            },
+
+            stampLimit: 500,
+        });
+    }
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#collect_rewards").text("Waiting for TX..");
 });
@@ -520,19 +550,31 @@ $(document).on("click", ".plot", function (e) {
 
         }
     });
+    if(district == 1){
     $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixelcity_staking_master_4/staking_rewards", function (build_meta) {
-     
-        if(isNaN(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8))){
-            $("#mob_rewards_owner").text(Number(0).toFixed(8));
+        try {
+            if (isNaN(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8))) {
+                $("#mob_rewards_owner").text(Number(0).toFixed(8));
+            }
+            else {
+                $("#mob_rewards_owner").text(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8));
+            }
         }
-        else{
-            $("#mob_rewards_owner").text(Number(build_meta["con_pixelcity_staking_master_4"]['staking_rewards'][build_owner]["__fixed__"]).toFixed(8));
+        catch {
+            $("#mob_rewards_owner").text(Number(0).toFixed(8));
+            
+
         }
     });
-        
+    }
+        console.log(build_owner);
+        console.log(address);
+        console.log(plot_owner);
     if (build_owner == undefined) {
         $('#owned').hide();
         $('#build').show();
+        $('#collect_rewards').hide();
+        $('#collect_mob_rewards').hide();
     }
     if (address == plot_owner && build_owner == undefined) {
         $('#build').show()
