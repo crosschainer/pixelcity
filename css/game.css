@@ -32,7 +32,7 @@ html, body
 #city{
     width:2048px;
     height:2048px;
-    background:white;
+    background:lightgray;
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(8,1fr);
@@ -41,7 +41,7 @@ html, body
     grid-row-gap: 0px;
     padding-left: 3em;
     padding-top: 7em;
-    background-image: url("../img/bg_new.png");
+    
     color: #444;
     border: 10px solid;
     border-color: #8b8b8b;
@@ -52,7 +52,7 @@ html, body
 #city_2{
     width:2048px;
     height:2048px;
-    background:white;
+    background:lightgray;
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(8,1fr);
@@ -61,7 +61,7 @@ html, body
     grid-row-gap: 0px;
     padding-left: 3em;
     padding-top: 7em;
-    background-image: url("../img/bg_new.png");
+    
     color: #444;
     border: 10px solid;
     border-color: #8b8b8b;
