@@ -287,7 +287,8 @@ $("#build").click(function () {
     var plot_id = parseInt($("#plot_id").text());
     var district_id = parseInt($("#district_id").text());
     var shown_msg = false;
-    var x = 0
+    var x = 0;
+    var y = 0;
     if(district_id == 1){
         plot_keys.forEach((key, index) => {
         switch (plot_id) {
@@ -340,12 +341,13 @@ $("#build").click(function () {
         });
     }
     if(district_id == 2){
+       console.log(plot_keys_2);
         plot_keys_2.forEach((key, index) => {
         switch (plot_id) {
             case parseInt(key):
-                console.log(key);
+
                 if(plot_id in plot_keys_2){
-                    x = plot_object[key];
+                    y = plot_object_2[key];
                 }
                 else{
                     alert("This plot has not been minted yet");
@@ -356,6 +358,7 @@ $("#build").click(function () {
                     
                 }
                 else{
+                
                     if(shown_msg == false){
                     alert("This plot has not been minted yet");
                     shown_msg = true;
@@ -364,12 +367,13 @@ $("#build").click(function () {
                 break;
         }
         });
-        console.log("PLOT UID: " + x);
-        console.log("PLOT INTERNAL: " + plot_id);
-        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/" + x, function (plot_check) {
-            console.log("PLOT OWNER: "+ plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"]);
+        //console.log("PLOT UID: " + x);
+        //console.log("PLOT INTERNAL: " + plot_id);
+        $.getJSON("https://blockservice.nebulamden.finance/current/all/con_pixel_whale_info_v1/S/" + y, function (plot_check) {
+            console.log("PLOT OWNER: "+ plot_check["con_pixel_whale_info_v1"]["S"][y]["owner"]);
             console.log("LOGGED IN ADDRESS: " + address);
-            if (plot_check["con_pixel_whale_info_v1"]["S"][x]["owner"] != address) {
+            console.log(y);
+            if (plot_check["con_pixel_whale_info_v1"]["S"][y]["owner"] != address) {
                 alert("You don't own this plot, so you cant build on it!");
             }
             else {
@@ -553,9 +557,9 @@ $(document).on("click", ".plot", function (e) {
         }
     });
     }
-        console.log(build_owner);
-        console.log(address);
-        console.log(plot_owner);
+        //console.log(build_owner);
+        //console.log(address);
+        //console.log(plot_owner);
     if (build_owner == undefined) {
         $('#owned').hide();
         $('#build').show();
