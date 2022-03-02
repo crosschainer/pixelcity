@@ -386,7 +386,7 @@ $("#build").click(function () {
                     var arrayLength = owned_buildings.length;
                     for (var i = 0; i < arrayLength; i++) {
                         if (Object.values(building_object_2).indexOf(sha256(owned_buildings[i]["thing"])) > -1) {
-                            $("#building_nfts").append("<option data-plot='" + x + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
+                            $("#building_nfts").append("<option data-plot='" + y + "' value='" + sha256(owned_buildings[i]["thing"]) + "'>" + owned_buildings[i]["name"] + "</option>");
                         }
                         
                     }
