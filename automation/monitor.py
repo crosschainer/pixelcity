@@ -101,6 +101,27 @@ class PixelCityAutomation():
             tx_details_json_blockexplorer = urlopen(Request(self.blockexplorer_tx_endpoint + tx_details["transaction"]["payload"]["kwargs"]["uid"] + ":price:amount", headers={'User-Agent': 'Mozilla'}))
             tx_details_blockexplorer = json.loads(tx_details_json_blockexplorer.read())
             sale_price = float(tx_details_blockexplorer["prev_value"]["__fixed__"])
+
+            f = open("../js/plots.json", "r")
+            d = f.read()
+            self.nfts_plots_district_1 = list(json.loads(d).values())
+            f.close()
+
+            f = open("../js/buildings.json", "r")
+            d = f.read()
+            self.nfts_buildings_district_1 = list(json.loads(d).values())
+            f.close()
+
+            f = open("../js/plots_2.json", "r")
+            d = f.read()
+            self.nfts_plots_district_2 = list(json.loads(d).values())
+            f.close()
+
+            f = open("../js/buildings_2.json", "r")
+            d = f.read()
+            self.nfts_buildings_district_2 = list(json.loads(d).values())
+            f.close()
+
             if(tx_details["transaction"]["payload"]["kwargs"]["uid"] in self.nfts_plots_district_1):
                 district = 1
                 logging.debug("Royalties are " + str(sale_price/100*5) + " to District 1")
