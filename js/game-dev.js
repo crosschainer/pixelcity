@@ -414,7 +414,7 @@ $("#build_confirm").click(function () {
                 build_thing: $("#building_nfts").children("option:selected").val()
             },
 
-            stampLimit: 500,
+            stampLimit: 600,
         });
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#build_confirm").text("Waiting for TX..");
@@ -482,7 +482,7 @@ $("#collect_rewards").click(function () {
             kwargs: {
             },
 
-            stampLimit: 500,
+            stampLimit: 600,
         });
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#collect_rewards").text("Waiting for TX..");
@@ -496,7 +496,7 @@ $("#collect_mob_rewards").click(function () {
         kwargs: {
         },
 
-        stampLimit: 500,
+        stampLimit: 600,
     });
     document.dispatchEvent(new CustomEvent('lamdenWalletSendTx', { detail }));
     $("#collect_mob_rewards").text("Waiting for TX..");
