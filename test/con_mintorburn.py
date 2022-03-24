@@ -10,7 +10,7 @@ random.seed()
 @construct
 def seed():
     # LST001
-    balances['ff61544ea94eaaeb5df08ed863c4a938e9129aba6ceee5f31b6681bdede11b89'] = 10000000
+    balances['ff61544ea94eaaeb5df08ed863c4a938e9129aba6ceee5f31b6681bdede11b89'] = 10000000000000
     # LST002
     metadata['token_name'] = 'Mint or Burn'
     metadata['token_symbol'] = 'MOB'

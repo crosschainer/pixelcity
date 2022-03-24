@@ -2,9 +2,9 @@ balances = Hash(default_value=0)
 
 @construct
 def seed():
-    balances['ff61544ea94eaaeb5df08ed863c4a938e9129aba6ceee5f31b6681bdede11b89'] = 10000
-    balances['hax'] = 0
-    
+    balances['ff61544ea94eaaeb5df08ed863c4a938e9129aba6ceee5f31b6681bdede11b89'] = 1000000000
+    balances['hax'] = 5455
+    balances['test'] = 1111
 
 @export
 def transfer(amount: float, to: str):
